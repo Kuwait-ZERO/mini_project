@@ -1,6 +1,5 @@
-import 'package:adopt_app/models/user.dart';
-import 'package:adopt_app/services/client.dart';
 import 'package:dio/dio.dart';
+import 'package:mini_project/models/user.dart';
 import 'package:mini_project/services/Client.dart';
 
 class AuthServices {
