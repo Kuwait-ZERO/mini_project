@@ -1,31 +1,23 @@
-// import 'package:adopt_app/services/pets.dart';
-// import 'package:adopt_app/models/pet.dart';
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:mini_project/models/tips.dart';
+import 'package:mini_project/services/post_service.dart';
 
-// class PostProviders extends ChangeNotifier {
-//   List<Post> posts = [];
+class PostProviders extends ChangeNotifier {
+  List<Post> posts = [];
 
-//   Future<void> getPost() async {
-//     posts = await DioClient().getPets();
-//   }
+  Future<void> getPost() async {
+    posts = await DioClient().getPosts();
+  }
 
-//   void createPost(Post post) async {
-//     Post newPost = await DioClient().createPost(post: post);
-//     posts.insert(0, newPost);
-//     notifyListeners();
-//   }
+  void createPost(Post post) async {
+    Post newPost = await DioClient().createPost(post: post);
+    posts.insert(0, newPost);
+    notifyListeners();
+  }
 
-//   void updatePost(Post post) async {
-//     Post newPost = await DioClient().updatePost(post: post);
-//     int index = posts.indexWhere((post) => post.id == newPost.id);
-//     posts[index] = newPost;
-//     notifyListeners();
-//   }
-
-
-//   void deletePost(int petId) async {
-//     await DioClient().deletePost(postId: postId);
-//     posts.removeWhere((post) => post.id == postId);
-//     notifyListeners();
-//   }
-// }
+  void deletePost(int postId) async {
+    await DioClient().deletePost(postId: postId);
+    posts.removeWhere((post) => post.id == postId);
+    notifyListeners();
+  }
+}

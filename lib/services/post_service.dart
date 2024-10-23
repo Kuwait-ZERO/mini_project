@@ -1,66 +1,46 @@
-// import 'dart:async';
-// import 'package:adopt_app/models/pet.dart';
-// import "package:dio/dio.dart";
+import 'dart:async';
 
-// class DioClient {
-//   final Dio _dio = Dio();
+import "package:dio/dio.dart";
+import 'package:mini_project/models/tips.dart';
 
-//   final _baseUrl = 'https://coded-pets-api-auth.eapi.joincoded.com';
+class DioClient {
+  final Dio _dio = Dio();
 
-//   Future<List<Post>> getPets() async {
-//     List<Post> posts [];
-//     try {
-//       Response response = await _dio.get(_baseUrl + '/posts');
-//       posts = (response.data as List).map((pet) => Post.fromJson(post)).toList();
-//     } on DioError catch (error) {
-//       print(error);
-//     }
-//     return posts;
-//   }
+  final _baseUrl = 'https://coded-meditation.eapi.joincoded.com';
 
-//   Future<Post> createPet({required Post pet}) async {
-//     late Post retrievedPet;
-//     try {
-//       FormData data = FormData.fromMap({
-//         "name": post.name,
-//         "age": post.age,
-//         "gender": post.gender,
-        
-//       });
-//       Response response = await _dio.post(_baseUrl + '/posts', data: data);
-//       retrievedPost = Post.fromJson(response.data);
-//     } on DioError catch (error) {
-//       print(error);
-//     }
-//     return retrievedPet;
-//   }
+  Future<List<Post>> getPosts() async {
+    List<Post> posts = [];
+    try {
+      Response response = await _dio.get(_baseUrl + '/tips');
+      posts =
+          (response.data as List).map((post) => Post.fromJson(post)).toList();
+    } on DioError catch (error) {
+      print(error);
+    }
+    return posts;
+  }
 
-//   Future<Post> updatePet({required Post pet}) async {
-//     late Post retrievedPost;
-//     try {
-//       FormData data = FormData.fromMap({
-//         "name": pet.name,
-//         "age": pet.age,
-//         "gender": pet.gender,
-        
-//       });
+  Future<Post> createPost({required Post post}) async {
+    late Post retrievedPost;
+    try {
+      FormData data = FormData.fromMap({
+        "id": post.id,
+        "text": post.text,
+        "author": post.author,
+      });
+      Response response = await _dio.post(_baseUrl + '/tips', data: data);
+      retrievedPost = Post.fromJson(response.data);
+    } on DioError catch (error) {
+      print(error);
+    }
+    return retrievedPost;
+  }
 
-//       Response response =
-//           await _dio.put(_baseUrl + '/posts/${pet.id}', data: data);
-//       retrievedPet = Post.fromJson(response.data);
-//     } on DioError catch (error) {
-//       print(error);
-//     }
-//     return retrievedPet;
-//   }
-
-//   Future<void> deletePet({required int petId}) async {
-//     try {
-//       await _dio.delete(_baseUrl + '/posts/${petId}');
-//     } on DioError catch (error) {
-//       print(error);
-//     }
-//   }
-
-
-// }
+  Future<void> deletePost({required int postId}) async {
+    try {
+      await _dio.delete(_baseUrl + '/tips${postId}');
+    } on DioError catch (error) {
+      print(error);
+    }
+  }
+}

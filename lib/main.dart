@@ -10,12 +10,14 @@ import 'package:mini_project/pages/setting_page.dart';
 import 'package:mini_project/pages/tips_page.dart';
 import 'package:mini_project/pages/yoga_page.dart';
 import 'package:mini_project/providers/auth_providers.dart';
+import 'package:mini_project/providers/post_providers.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider<PostProviders>(create: (_) => PostProviders()),
         ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
       ],
       child: MyApp(),
