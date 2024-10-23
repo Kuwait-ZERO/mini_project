@@ -8,27 +8,139 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('homepage'),
-        ),
-        body: GridView(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-            ),
-            children: [
-              myBox(1),
-              myBox(1),
-              myBox(1),
-              myBox(1),
-            ]));
-  }
-}
+      appBar: AppBar(
+        title: Text('Homepage'),
+      ),
+      body: Column(
+        children: [
+          // Empty container on top
+          Container(
+            height: 200, // Adjust the height as needed
+            width: double.infinity,
+            color: Colors
+                .grey[200], // Light background color to visualize the space
+          ),
 
-Widget myBox(int index) {
-  return Container(
-    margin: EdgeInsets.all(8),
-    color: Colors.purple,
-    alignment: Alignment.center,
-    child: Text("placeholder"),
-  );
+          const SizedBox(
+              height: 20), // Spacing between the container and the cards
+
+          // Cards at the bottom
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2, // Two cards per row
+              crossAxisSpacing: 15, // Space between the cards horizontally
+              mainAxisSpacing: 15, // Space between the cards vertically
+              padding: const EdgeInsets.all(15), // Padding for the overall grid
+              children: [
+                InkWell(
+                  onTap: () {
+                    context.go("/MeditationPage");
+                  },
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    color: Colors.blue,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Text(
+                          'meditation',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    context.go("/Music");
+                  },
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    color: Colors.green,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Text(
+                          'Music',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    context.go('/TipsPage');
+                  },
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    color: Colors.orange,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Text(
+                          'Tips',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    context.go("/YogaPage");
+                  },
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    color: Colors.purple,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Text(
+                          'Yoga',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

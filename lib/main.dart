@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mini_project/pages/home_page.dart';
+import 'package:mini_project/pages/meditation_page.dart';
+import 'package:mini_project/pages/music_page.dart';
 import 'package:mini_project/pages/sign_in.dart';
 import 'package:mini_project/pages/sign_up.dart';
+import 'package:mini_project/pages/tips_page.dart';
+import 'package:mini_project/pages/yoga_page.dart';
 import 'package:mini_project/providers/auth_providers.dart';
 import 'package:provider/provider.dart';
 
@@ -32,10 +36,22 @@ class MyApp extends StatelessWidget {
         path: '/',
         builder: (context, state) => const HomePage(),
       ),
-      // GoRoute(
-      //   path: '/add',
-      //   builder: (context, state) => AddPage(),
-      // ),
+      GoRoute(
+        path: '/Yoga',
+        builder: (context, state) => YogaPage(),
+      ),
+      GoRoute(
+        path: '/Music',
+        builder: (context, state) => MusicPage(),
+      ),
+      GoRoute(
+        path: '/Meditation',
+        builder: (context, state) => MeditationPage(),
+      ),
+      GoRoute(
+        path: '/Tips',
+        builder: (context, state) => TipsPage(),
+      ),
       GoRoute(
         path: '/signup',
         builder: (context, state) => SignupPage(),
@@ -44,14 +60,6 @@ class MyApp extends StatelessWidget {
         path: '/signin',
         builder: (context, state) => SigninPage(),
       ),
-      // GoRoute(
-      //   path: '/update/:petId',
-      //   builder: (context, state) {
-      //     final pet = Provider.of<postProvider>(context).pets.firstWhere(
-      //         (pet) => pet.id.toString() == (state.pathParameters['petId']!));
-      //     return UpdatePage(pet: pet);
-      //   },
-      // ),
     ],
   );
 }
