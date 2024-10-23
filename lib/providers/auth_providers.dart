@@ -9,6 +9,8 @@ import 'package:mini_project/services/Client.dart';
 import 'package:mini_project/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+export "package:provider/provider.dart";
+
 class AuthProvider extends ChangeNotifier {
   String token = "";
   late User user;
@@ -20,11 +22,17 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void signin({required User user}) async {
-    token = await AuthServices().signin(user: user);
-    _setToken(token);
-    print(token);
-    notifyListeners();
+  Future<bool> signin({required User user}) async {
+    try {
+      token = await AuthServices().signin(user: user);
+      this.user = User.fromJson(Jwt.parseJwt(token));
+      _setToken(token);
+      print(token);
+      notifyListeners();
+      return true;
+    } on Exception {
+      return false;
+    }
   }
 
   void _setToken(String token) async {

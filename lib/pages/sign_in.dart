@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project/models/user.dart';
+import 'package:mini_project/pages/home_page.dart';
 import 'package:mini_project/providers/auth_providers.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
@@ -30,12 +31,19 @@ class SigninPage extends StatelessWidget {
               obscureText: true,
             ),
             ElevatedButton(
-              onPressed: () {
-                Provider.of<AuthProvider>(context, listen: false).signin(
-                    user: User(
-                        username: usernameController.text,
-                        password: passwordController.text));
-                context.pop();
+              onPressed: () async {
+                var result =
+                    await Provider.of<AuthProvider>(context, listen: false)
+                        .signin(
+                            user: User(
+                                username: usernameController.text,
+                                password: passwordController.text));
+
+                if (result) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text("You are Signin")));
+                  context.push('/setting');
+                }
               },
               child: const Text("Sign In"),
             )
