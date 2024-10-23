@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,7 +33,7 @@ class HomePage extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    context.go("/MeditationPage");
+                    context.go("/meditation");
                   },
                   child: Card(
                     elevation: 10,
@@ -60,7 +59,7 @@ class HomePage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    context.go("/Music");
+                    context.go("/music");
                   },
                   child: Card(
                     elevation: 10,
@@ -86,7 +85,7 @@ class HomePage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    context.go('/TipsPage');
+                    context.go('/tips');
                   },
                   child: Card(
                     elevation: 10,
@@ -112,7 +111,7 @@ class HomePage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    context.go("/YogaPage");
+                    context.go("/yoga");
                   },
                   child: Card(
                     elevation: 10,

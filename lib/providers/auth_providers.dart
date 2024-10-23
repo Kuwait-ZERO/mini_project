@@ -1,7 +1,4 @@
 import 'dart:io';
-
-import 'package:dio/dio.dart';
-
 import 'package:flutter/material.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:mini_project/models/user.dart';

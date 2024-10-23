@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import 'package:flutter/material.dart';
-
-class MeditationPage {
-=======
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,14 +5,10 @@ class MeditationPage extends StatelessWidget {
   MeditationPage({Key? key}) : super(key: key);
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
->>>>>>> f3575bef434723f1145e6245e153491aa2b93c72
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-<<<<<<< HEAD
-        title: const Text("update a Pet"),
-=======
         title: const Text("Sign up"),
       ),
       resizeToAvoidBottomInset: false,
@@ -41,7 +32,6 @@ class MeditationPage extends StatelessWidget {
             )
           ],
         ),
->>>>>>> f3575bef434723f1145e6245e153491aa2b93c72
       ),
     );
   }
