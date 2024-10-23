@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mini_project/pages/home_page.dart';
 import 'package:mini_project/pages/meditation_page.dart';
 import 'package:mini_project/pages/music_page.dart';
+import 'package:mini_project/pages/setting_page.dart';
 import 'package:mini_project/pages/sign_in.dart';
 import 'package:mini_project/pages/sign_up.dart';
 import 'package:mini_project/pages/splash_page.dart';
@@ -39,16 +40,16 @@ class MyApp extends StatelessWidget {
   }
 
   final _router = GoRouter(
-    initialLocation: "/splash",
+    //  initialLocation: "/splash",
     routes: [
       GoRoute(
         path: '/',
         builder: (context, state) => SigninPage(),
       ),
-      GoRoute(
-        path: '/splash',
-        builder: (context, state) => SplashPage(),
-      ),
+      // GoRoute(
+      //   path: '/splash',
+      //   builder: (context, state) => SplashPage(),
+      // ),
       GoRoute(
         path: '/home',
         name: RouteNames.home.name, //home
@@ -76,6 +77,14 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/meditation',
         builder: (context, state) => MeditationPage(),
+      ),
+      //  GoRoute(
+      //   path: '/profile',
+      //   builder: (context, state) => profilePage(),
+      // ),
+      GoRoute(
+        path: '/setting',
+        builder: (context, state) => SettingsPage(),
       ),
     ],
   );

@@ -31,12 +31,19 @@ class SigninPage extends StatelessWidget {
               obscureText: true,
             ),
             ElevatedButton(
-              onPressed: () {
-                Provider.of<AuthProvider>(context, listen: false).signin(
-                    user: User(
-                        username: usernameController.text,
-                        password: passwordController.text));
-                context.go('/home');
+              onPressed: () async {
+                var result =
+                    await Provider.of<AuthProvider>(context, listen: false)
+                        .signin(
+                            user: User(
+                                username: usernameController.text,
+                                password: passwordController.text));
+
+                if (result) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text("You are Signin")));
+                  context.push('/setting');
+                }
               },
               child: const Text("Sign In"),
             )
