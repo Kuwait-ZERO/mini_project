@@ -9,6 +9,8 @@ import 'package:mini_project/services/Client.dart';
 import 'package:mini_project/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+export "package:provider/provider.dart";
+
 class AuthProvider extends ChangeNotifier {
   String token = "";
   late User user;
