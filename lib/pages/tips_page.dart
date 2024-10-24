@@ -98,15 +98,8 @@ class TipsPage extends StatelessWidget {
                   } else {
                     return Consumer<PostProviders>(
                       builder: (context, petsProvider, child) =>
-                          GridView.builder(
+                          ListView.builder(
                               shrinkWrap: true,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio:
-                                    MediaQuery.of(context).size.width /
-                                        (MediaQuery.of(context).size.height),
-                              ),
                               physics:
                                   const NeverScrollableScrollPhysics(), // <- Here
                               itemCount: petsProvider.posts.length,
