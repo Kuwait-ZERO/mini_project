@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mini_project/models/user.dart';
 import 'package:mini_project/providers/auth_providers.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,11 @@ class SignupPage extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+  XFile? _image;
+  String name = "";
+  String gender = "";
+  int age = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +39,9 @@ class SignupPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 Provider.of<AuthProvider>(context, listen: false).signup(
-                    user: User(
-                        username: usernameController.text,
-                        password: passwordController.text));
+                    username: usernameController.text,
+                    password: passwordController.text,
+                    imagePath: _image!.path);
                 context.pop();
               },
               child: const Text("Sign Up"),

@@ -24,7 +24,6 @@ class DioClient {
     late Post retrievedPost;
     try {
       FormData data = FormData.fromMap({
-        "id": post.id,
         "text": post.text,
         "author": post.author,
       });

@@ -12,8 +12,16 @@ class AuthProvider extends ChangeNotifier {
   String token = "";
   late User user;
 
-  void signup({required User user}) async {
-    token = await AuthServices().signup(user: user);
+  void signup({
+    required String username,
+    required String password,
+    required String imagePath,
+  }) async {
+    token = await AuthServices().signup(
+      username: username,
+      password: password,
+      imagePath: imagePath,
+    );
     _setToken(token);
     print(token);
     notifyListeners();

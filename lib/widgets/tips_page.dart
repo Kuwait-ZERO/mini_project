@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mini_project/models/tips.dart';
 import 'package:mini_project/providers/post_providers.dart';
 import 'package:provider/provider.dart';

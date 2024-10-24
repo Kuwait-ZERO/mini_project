@@ -5,13 +5,21 @@ import 'package:mini_project/services/Client.dart';
 class AuthServices {
   final Dio _dio = Dio();
 
-  final _baseUrl = 'https://coded-pets-api-auth.eapi.joincoded.com';
+  final _baseUrl = 'https://coded-meditation.eapi.joincoded.com';
 
-  Future<String> signup({required User user}) async {
+  Future<String> signup({
+    required String username,
+    required String password,
+    required String imagePath,
+  }) async {
     late String token;
     try {
-      Response response =
-          await _dio.post(_baseUrl + '/signup', data: user.toJson());
+      Response response = await _dio.post(_baseUrl + '/signup',
+          data: FormData.fromMap({
+            "username": username,
+            "password": password,
+            "image": await MultipartFile.fromFile(imagePath),
+          }));
       token = response.data["token"];
     } on DioError catch (error) {
       print(error);

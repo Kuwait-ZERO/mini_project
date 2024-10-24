@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mini_project/providers/auth_providers.dart'; // Ensure you have this provider
 import 'package:provider/provider.dart'; // Import the provider package
 
@@ -52,9 +53,10 @@ class SettingsPage extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () {
-                                // Call logout method from AuthProvider
-                                authProvider.logout();
-                                Navigator.of(context).pop();
+                                Provider.of<AuthProvider>(context,
+                                        listen: false)
+                                    .logout();
+                                context.go('/');
                               },
                               child: Text('Logout'),
                             ),

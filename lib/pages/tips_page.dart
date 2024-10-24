@@ -12,7 +12,7 @@ class TipsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Pet Adopt"),
+        title: const Text("Tips"),
       ),
       drawer: Drawer(
         child: FutureBuilder(
@@ -74,11 +74,11 @@ class TipsPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  GoRouter.of(context).push('/add');
+                  GoRouter.of(context).push('/addtip');
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(12.0),
-                  child: Text("Add a new Pet"),
+                  child: Text("Add a new Tip"),
                 ),
               ),
             ),

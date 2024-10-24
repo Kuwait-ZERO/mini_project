@@ -11,6 +11,7 @@ import 'package:mini_project/pages/tips_page.dart';
 import 'package:mini_project/pages/yoga_page.dart';
 import 'package:mini_project/providers/auth_providers.dart';
 import 'package:mini_project/providers/post_providers.dart';
+import 'package:mini_project/widgets/add_form.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _router,
+      debugShowCheckedModeBanner: false,
     );
   }
 
@@ -68,6 +70,10 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/setting',
         builder: (context, state) => SettingsPage(),
+      ),
+      GoRoute(
+        path: '/addtip',
+        builder: (context, state) => AddTipForm(),
       ),
     ],
   );
