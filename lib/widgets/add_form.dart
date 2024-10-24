@@ -31,21 +31,6 @@ class AddTipFormState extends State<AddTipForm> {
           children: <Widget>[
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Author Name',
-              ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "please fill out this field";
-                } else {
-                  return null;
-                }
-              },
-              onSaved: (value) {
-                author = value!;
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
                 hintText: 'Write your tip!',
               ),
               maxLines: null,
@@ -69,10 +54,7 @@ class AddTipFormState extends State<AddTipForm> {
                     _formKey.currentState!.save();
 
                     Provider.of<PostProviders>(context, listen: false)
-                        .createPost(Post(
-                      author: author,
-                      text: text,
-                    ));
+                        .createPost(text);
                     GoRouter.of(context).pop();
                   }
                 },

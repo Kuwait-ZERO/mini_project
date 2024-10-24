@@ -2,44 +2,45 @@ import 'dart:async';
 
 import "package:dio/dio.dart";
 import 'package:mini_project/models/tips.dart';
+import 'package:mini_project/services/Client.dart';
 
 class DioClient {
-  final Dio _dio = Dio();
-
-  final _baseUrl = 'https://coded-meditation.eapi.joincoded.com';
-
   Future<List<Post>> getPosts() async {
     List<Post> posts = [];
     try {
-      Response response = await _dio.get(_baseUrl + '/tips');
+      Response response = await Client.dio.get('/tips');
       posts =
           (response.data as List).map((post) => Post.fromJson(post)).toList();
-    } on DioError catch (error) {
-      print(error);
+    } on DioException catch (error) {
+      print(error.message);
     }
     return posts;
   }
 
-  Future<Post> createPost({required Post post}) async {
-    late Post retrievedPost;
+  Future<Post> createPost(String text) async {
+    Map data = ({
+      "text": text,
+    });
     try {
-      FormData data = FormData.fromMap({
-        "text": post.text,
-        "author": post.author,
-      });
-      Response response = await _dio.post(_baseUrl + '/tips', data: data);
-      retrievedPost = Post.fromJson(response.data);
-    } on DioError catch (error) {
-      print(error);
+      Response response = await Client.dio.post(
+        '/tips',
+        data: {
+          "text": text,
+        },
+      );
+
+      return Post.fromJson(response.data);
+    } on DioException catch (error) {
+      print(error.response);
     }
-    return retrievedPost;
+    throw "failed";
   }
 
   Future<void> deletePost({required int postId}) async {
     try {
-      await _dio.delete(_baseUrl + '/tips${postId}');
-    } on DioError catch (error) {
-      print(error);
+      await Client.dio.delete('/tips${postId}');
+    } on DioException catch (error) {
+      print(error.message);
     }
   }
 }

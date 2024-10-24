@@ -9,8 +9,8 @@ class PostProviders extends ChangeNotifier {
     posts = await DioClient().getPosts();
   }
 
-  void createPost(Post post) async {
-    Post newPost = await DioClient().createPost(post: post);
+  void createPost(String text) async {
+    Post newPost = await DioClient().createPost(text);
     posts.insert(0, newPost);
     notifyListeners();
   }
