@@ -7,49 +7,67 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFD1E6F2), // Very Light Blue background
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text(
+          'Settings',
+          style: TextStyle(color: Colors.white), // White text color
+        ),
         centerTitle: true,
+        backgroundColor: const Color(0xFF5B9BD5), // Soft Blue AppBar background
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Account Button
             ElevatedButton(
               onPressed: () {
                 // Navigate to Account details page or perform other action
                 Navigator.pushNamed(context, '/profile');
               },
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                backgroundColor: Colors.blue, // Customize the color
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                backgroundColor:
+                    const Color(0xFF5B9BD5), // Soft Blue button color
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
-              child: Text(
+              child: const Text(
                 'Account',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                    fontSize: 18, color: Colors.white), // White text color
               ),
             ),
-            SizedBox(height: 20), // Spacing between buttons
-            // Logout Button
+            const SizedBox(height: 20), // Spacing between buttons
             Consumer<AuthProvider>(
               builder: (context, authProvider, child) {
                 return ElevatedButton(
                   onPressed: () {
-                    // Perform logout action
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('Logout'),
-                          content: Text('Are you sure you want to log out?'),
+                          backgroundColor: const Color(
+                              0xFFF2F2F2), // Light background for dialog
+                          title: const Text(
+                            'Logout',
+                            style: TextStyle(
+                                color: Colors.black), // Black text color
+                          ),
+                          content: const Text(
+                            'Are you sure you want to log out?',
+                            style: TextStyle(
+                                color: Colors.black), // Black text color
+                          ),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text('Cancel'),
+                              child: const Text('Cancel',
+                                  style: TextStyle(color: Colors.black)),
                             ),
                             TextButton(
                               onPressed: () {
@@ -58,7 +76,8 @@ class SettingsPage extends StatelessWidget {
                                     .logout();
                                 context.go('/');
                               },
-                              child: Text('Logout'),
+                              child: const Text('Logout',
+                                  style: TextStyle(color: Colors.black)),
                             ),
                           ],
                         );
@@ -66,13 +85,17 @@ class SettingsPage extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    backgroundColor:
-                        Colors.red, // Customize the color for Logout
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: const Color(
+                        0xFFEB5757), // Soft Red for the Logout button
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Logout',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(
+                        fontSize: 18, color: Colors.white), // White text color
                   ),
                 );
               },

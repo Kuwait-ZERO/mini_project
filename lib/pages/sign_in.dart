@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project/models/user.dart';
-import 'package:mini_project/providers/auth_providers.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mini_project/providers/auth_providers.dart';
+import 'package:mini_project/models/user.dart';
 
 class SigninPage extends StatelessWidget {
   SigninPage({Key? key}) : super(key: key);
@@ -10,134 +10,135 @@ class SigninPage extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Color usernameBorderColor = const Color(0xFF005BAA);
-  Color passwordBorderColor = const Color(0xFF005BAA);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE5F1F9),
+      backgroundColor: const Color(0xFFA3D9A5), // Light Green background
       appBar: AppBar(
-        title: const Text("Sign in"),
-        backgroundColor: const Color(0xFF005BAA), // Burgan Bank Blue
+        title: const Text(
+          "Sign in",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: const Color(0xFF6BBF59), // Soft Green AppBar
       ),
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 40),
-              const Center(
-                child: CircleAvatar(
-                  radius: 60,
-                  backgroundImage: AssetImage('assets/images/burgan.jpg'),
-                  backgroundColor: Colors.transparent,
-                ),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 40),
+            const Center(
+              child: CircleAvatar(
+                radius: 60,
+                backgroundImage: AssetImage(
+                    'assets/images/your_image.png'), // Placeholder image
+                backgroundColor: Colors.transparent,
               ),
-              const SizedBox(height: 20),
-              const Text(
-                'Welcome to Burgan Bank',
-                style: TextStyle(
-                  color: Color(0xFF005BAA),
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Welcome to Burgan Bank',
+              style: TextStyle(
+                color: Colors.black, // Black text for contrast
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: 30),
-              TextField(
-                controller: usernameController,
-                style: const TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: "Username / Email",
-                  hintStyle: const TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(Icons.account_circle, color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: usernameBorderColor),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color(0xFF005BAA),
-                      width: 2,
-                    ),
-                  ),
+            ),
+            const SizedBox(height: 30),
+            TextField(
+              controller: usernameController,
+              style: const TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor:
+                    const Color(0xFFF5F5DC), // Light Beige background for input
+                hintText: "Username / Email",
+                hintStyle: const TextStyle(color: Colors.grey),
+                prefixIcon: Icon(Icons.account_circle, color: Colors.grey),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
                 ),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: passwordController,
-                obscureText: true,
-                style: const TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: "Password",
-                  hintStyle: const TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: passwordBorderColor),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color(0xFF005BAA),
-                      width: 2,
-                    ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF6BBF59), // Soft Green border when focused
+                    width: 2,
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF005BAA),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              style: const TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor:
+                    const Color(0xFFF5F5DC), // Light Beige background for input
+                hintText: "Password",
+                hintStyle: const TextStyle(color: Colors.grey),
+                prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF6BBF59), // Soft Green border when focused
+                    width: 2,
                   ),
                 ),
-                onPressed: () async {
-                  var result =
-                      await Provider.of<AuthProvider>(context, listen: false)
-                          .signin(
-                    user: User(
-                      username: usernameController.text,
-                      password: passwordController.text,
-                    ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                    const Color(0xFF6BBF59), // Soft Green button color
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () async {
+                var result =
+                    await Provider.of<AuthProvider>(context, listen: false)
+                        .signin(
+                  user: User(
+                    username: usernameController.text,
+                    password: passwordController.text,
+                  ),
+                );
+                if (result) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("You are Signed in")),
                   );
-
-                  if (result) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("You are Signed in")),
-                    );
-                    context.go('/home');
-                  } else {
-                    showError(context, "Email and/or Password is wrong");
-                  }
-                },
-                child: const Text(
-                  "Login",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
+                  context.go('/home');
+                } else {
+                  showError(context, "Email and/or Password is wrong");
+                }
+              },
+              child: const Text(
+                "Login",
+                style: TextStyle(fontSize: 18, color: Colors.white),
               ),
-              const SizedBox(height: 10),
-              TextButton(
-                onPressed: () {
-                  context.go('/signup');
-                },
-                child: const Text(
-                  "Don't have an account? Sign Up",
-                  style: TextStyle(color: Color(0xFF005BAA)),
-                ),
+            ),
+            const SizedBox(height: 10),
+            TextButton(
+              onPressed: () {
+                context.go('/signup');
+              },
+              child: const Text(
+                "Don't have an account? Sign Up",
+                style: TextStyle(color: Color(0xFF6BBF59)), // Soft Green text
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -12,40 +12,87 @@ class SignupPage extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
   XFile? _image;
-  String name = "";
-  String gender = "";
-  int age = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFA3D9A5), // Light Green background
       appBar: AppBar(
-        title: const Text("Sign up"),
+        title: const Text(
+          "Sign up",
+          style: TextStyle(color: Colors.white), // White text
+        ),
+        backgroundColor:
+            const Color(0xFF6BBF59), // Soft Green AppBar background
       ),
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            const Text("Sign Up"),
-            TextField(
-              decoration: const InputDecoration(hintText: 'Username'),
-              controller: usernameController,
+            const SizedBox(height: 20),
+            CircleAvatar(
+              radius: 60,
+              // backgroundImage: _image != null
+              //     ? FileImage(File(_image!.path))
+              //     : const AssetImage('assets/images/default_profile.png') as ImageProvider, // Placeholder image
+              backgroundColor: Colors.transparent,
             ),
+            const SizedBox(height: 20),
             TextField(
-              decoration: const InputDecoration(hintText: 'Password'),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor:
+                    const Color(0xFFF5F5DC), // Light Beige background for input
+                hintText: 'Username',
+                hintStyle: const TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              controller: usernameController,
+              style: const TextStyle(color: Colors.black), // Black text
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              decoration: InputDecoration(
+                filled: true,
+                fillColor:
+                    const Color(0xFFF5F5DC), // Light Beige background for input
+                hintText: 'Password',
+                hintStyle: const TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+              ),
               controller: passwordController,
               obscureText: true,
+              style: const TextStyle(color: Colors.black), // Black text
             ),
+            const SizedBox(height: 30),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                    const Color(0xFF6BBF59), // Soft Green button color
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               onPressed: () {
                 Provider.of<AuthProvider>(context, listen: false).signup(
-                    username: usernameController.text,
-                    password: passwordController.text,
-                    imagePath: _image!.path);
+                  username: usernameController.text,
+                  password: passwordController.text,
+                  imagePath: _image != null ? _image!.path : "",
+                );
                 context.pop();
               },
-              child: const Text("Sign Up"),
-            )
+              child:
+                  const Text("Sign Up", style: TextStyle(color: Colors.white)),
+            ),
           ],
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mini_project/pages/home_page.dart';
 import 'package:mini_project/pages/meditation_page.dart';
 import 'package:mini_project/pages/music_page.dart';
+import 'package:mini_project/pages/profile_page.dart';
 import 'package:mini_project/pages/sign_in.dart';
 import 'package:mini_project/pages/sign_up.dart';
 import 'package:mini_project/pages/setting_page.dart';
@@ -68,13 +69,17 @@ class MyApp extends StatelessWidget {
         builder: (context, state) => MeditationPage(),
       ),
       GoRoute(
-        path: '/setting',
+        path: '/setting61',
         builder: (context, state) => SettingsPage(),
       ),
       GoRoute(
         path: '/addtip',
         builder: (context, state) => AddTipForm(),
       ),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) => ProfilePage(),
+      )
     ],
   );
 }

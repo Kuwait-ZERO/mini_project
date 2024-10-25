@@ -11,10 +11,19 @@ class TipsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFA3D9A5), // Light Green background
       appBar: AppBar(
-        title: const Text("Tips"),
+        title: const Text(
+          "Tips",
+          style: TextStyle(color: Colors.white), // White text color
+        ),
+        backgroundColor:
+            const Color(0xFF6BBF59), // Soft Green AppBar background
+        elevation: 0,
       ),
       drawer: Drawer(
+        backgroundColor:
+            const Color(0xFFF5F5DC), // Light Beige drawer background
         child: FutureBuilder(
           future: context.read<AuthProvider>().initializeAuth(),
           builder: (context, dataSnapshot) => Consumer<AuthProvider>(
@@ -23,14 +32,23 @@ class TipsPage extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     children: [
                       DrawerHeader(
-                        child: Text("Welcome ${authProvider.user.username}"),
+                        child: Text(
+                          "Welcome ${authProvider.user.username}",
+                          style: const TextStyle(
+                              color: Colors.white), // White text
+                        ),
                         decoration: const BoxDecoration(
-                          color: Colors.blue,
+                          color:
+                              Color(0xFF6BBF59), // Soft Green header background
                         ),
                       ),
                       ListTile(
-                        title: const Text("Logout"),
-                        trailing: const Icon(Icons.logout),
+                        title: const Text(
+                          "Logout",
+                          style: TextStyle(color: Colors.black), // Black text
+                        ),
+                        trailing: const Icon(Icons.logout,
+                            color: Colors.black), // Black icon
                         onTap: () {
                           Provider.of<AuthProvider>(context, listen: false)
                               .logout();
@@ -42,21 +60,33 @@ class TipsPage extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     children: [
                       const DrawerHeader(
-                        child: Text("Sign in please"),
+                        child: Text(
+                          "Sign in please",
+                          style: TextStyle(color: Colors.white), // White text
+                        ),
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color:
+                              Color(0xFF6BBF59), // Soft Green header background
                         ),
                       ),
                       ListTile(
-                        title: const Text("Signin"),
-                        trailing: const Icon(Icons.login),
+                        title: const Text(
+                          "Signin",
+                          style: TextStyle(color: Colors.black), // Black text
+                        ),
+                        trailing: const Icon(Icons.login,
+                            color: Colors.black), // Black icon
                         onTap: () {
                           GoRouter.of(context).push('/signin');
                         },
                       ),
                       ListTile(
-                        title: const Text("Signup"),
-                        trailing: const Icon(Icons.how_to_reg),
+                        title: const Text(
+                          "Signup",
+                          style: TextStyle(color: Colors.black), // Black text
+                        ),
+                        trailing: const Icon(Icons.how_to_reg,
+                            color: Colors.black), // Black icon
                         onTap: () {
                           GoRouter.of(context).push('/signup');
                         },
@@ -70,18 +100,6 @@ class TipsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  GoRouter.of(context).push('/addtip');
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: Text("Add a new Tip"),
-                ),
-              ),
-            ),
             FutureBuilder(
               future:
                   Provider.of<PostProviders>(context, listen: false).getPost(),
@@ -93,18 +111,29 @@ class TipsPage extends StatelessWidget {
                 } else {
                   if (dataSnapshot.error != null) {
                     return const Center(
-                      child: Text('An error occurred'),
+                      child: Text(
+                        'An error occurred',
+                        style: TextStyle(
+                            color: Colors.black), // Black text for errors
+                      ),
                     );
                   } else {
                     return Consumer<PostProviders>(
-                      builder: (context, petsProvider, child) =>
-                          ListView.builder(
-                              shrinkWrap: true,
-                              physics:
-                                  const NeverScrollableScrollPhysics(), // <- Here
-                              itemCount: petsProvider.posts.length,
-                              itemBuilder: (context, index) =>
-                                  PostCard(post: petsProvider.posts[index])),
+                      builder: (context, postProvider, child) =>
+                          GridView.builder(
+                        shrinkWrap: true,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1,
+                          crossAxisSpacing: 8.0,
+                          mainAxisSpacing: 8.0,
+                          childAspectRatio: 2.5,
+                        ),
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: postProvider.posts.length,
+                        itemBuilder: (context, index) =>
+                            PostCard(post: postProvider.posts[index]),
+                      ),
                     );
                   }
                 }
@@ -112,6 +141,14 @@ class TipsPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFF6BBF59), // Soft Green button color
+        onPressed: () {
+          GoRouter.of(context).push('/addtip');
+        },
+        child: const Icon(Icons.add,
+            color: Colors.white), // White icon on green button
       ),
     );
   }
