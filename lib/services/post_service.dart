@@ -42,8 +42,8 @@ class DioClient {
       await Client.dio.patch(
         '/tips/${post.id}',
         data: {
-          "upvotes": post.upvotes, // Send user IDs for upvotes
-          "downvotes": post.downvotes, // Send author names for downvotes
+          "upvotes": post.upvotes,
+          "downvotes": post.downvotes,
         },
       );
     } on DioError catch (error) {

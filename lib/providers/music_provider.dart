@@ -12,11 +12,11 @@ class MusicTrack {
 }
 
 class MusicProvider with ChangeNotifier {
-  List<MusicTrack> musicList = []; // List of music tracks
-  Set<String> favoriteTracks = {}; // Store favorite track IDs
+  List<MusicTrack> musicList = [];
+  Set<String> favoriteTracks = {};
 
   MusicProvider() {
-    loadFavorites(); // Load favorites from storage on initialization
+    loadFavorites();
   }
 
   Future<void> fetchMusic() async {
@@ -29,8 +29,8 @@ class MusicProvider with ChangeNotifier {
           .map((track) => MusicTrack(
               id: track['id'], title: track['title'], file: track['file']))
           .toList();
-      notifyListeners(); // Notify listeners to rebuild the UI
-      print('Fetched music tracks: ${musicList.length}'); // Debug print
+      notifyListeners();
+      print('Fetched music tracks: ${musicList.length}');
     } else {
       throw Exception('Failed to load music');
     }
@@ -43,7 +43,7 @@ class MusicProvider with ChangeNotifier {
       favoriteTracks.add(trackId); // Add to favorites
     }
     await saveFavorites(); // Save updated favorites to storage
-    notifyListeners(); // Notify listeners to update UI
+    notifyListeners();
   }
 
   bool isFavorite(String trackId) {
@@ -53,6 +53,7 @@ class MusicProvider with ChangeNotifier {
   Future<void> saveFavorites() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setStringList('favoriteTracks', favoriteTracks.toList());
+    print(favoriteTracks);
   }
 
   Future<void> loadFavorites() async {
