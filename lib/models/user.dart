@@ -31,6 +31,23 @@ class User {
   }
 }
 
+class Meditation {
+  final int id;
+  final String title;
+  final String file;
+
+  Meditation({required this.id, required this.title, required this.file});
+
+  factory Meditation.fromJson(Map<String, dynamic> json) {
+    return Meditation(
+      id: json['id'],
+      title: json['title'],
+      file: json['file'],
+    );
+  }
+}
+
+
 // void parsingExample() {
 //   Map json1 = {"username": "ghanim", "password": "123", "id": 1};
 //   Map json2 = {"username": "ghanim", "password": "123", "id": 1};

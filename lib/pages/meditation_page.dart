@@ -1,37 +1,70 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mini_project/providers/metitation_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class MeditationPage extends StatelessWidget {
-  MeditationPage({Key? key}) : super(key: key);
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+class MeditationListPage extends StatefulWidget {
+  @override
+  _MeditationListPageState createState() => _MeditationListPageState();
+}
+
+class _MeditationListPageState extends State<MeditationListPage> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<MeditationProvider>(context, listen: false).fetchMeditations();
+  }
+
+  Future<void> _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign up"),
+        title: const Text('Meditation Sessions'),
       ),
-      resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            const Text("Sign Up"),
-            TextField(
-              decoration: const InputDecoration(hintText: 'Username'),
-              controller: usernameController,
-            ),
-            TextField(
-              decoration: const InputDecoration(hintText: 'Password'),
-              controller: passwordController,
-              obscureText: true,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text("Sign Up"),
-            )
-          ],
-        ),
+      body: Consumer<MeditationProvider>(
+        builder: (context, meditationProvider, child) {
+          if (meditationProvider.meditations.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return ListView.builder(
+            itemCount: meditationProvider.meditations.length,
+            itemBuilder: (context, index) {
+              final meditation = meditationProvider.meditations[index];
+              return ListTile(
+                title: Text(meditation.title),
+                onTap: () {
+                  if (meditation.title == 'Alone') {
+                    _launchURL(
+                        'http://coded-meditation.eapi.joincoded.com/media/meditation/alone.mp3');
+                  } else if (meditation.title == 'Breath') {
+                    _launchURL(
+                        'http://coded-meditation.eapi.joincoded.com/media/meditation/breath.mp3');
+                  } else if (meditation.title == 'Driving') {
+                    _launchURL(
+                        'http://coded-meditation.eapi.joincoded.com/media/meditation/driving.mp3');
+                  } else if (meditation.title == 'Overwhelmed') {
+                    _launchURL(
+                        'http://coded-meditation.eapi.joincoded.com/media/meditation/overwhelmed.mp3');
+                  } else if (meditation.title == 'Panicking') {
+                    _launchURL(
+                        'http://coded-meditation.eapi.joincoded.com/media/meditation/panicking.mp3');
+                  } else if (meditation.title == 'Anxious') {
+                    _launchURL(
+                        'http://coded-meditation.eapi.joincoded.com/media/meditation/anxious.mp3');
+                  }
+                },
+              );
+            },
+          );
+        },
       ),
     );
   }

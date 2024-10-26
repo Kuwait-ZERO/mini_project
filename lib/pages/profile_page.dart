@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mini_project/main.dart';
 import 'package:mini_project/models/user.dart';
 import 'package:mini_project/providers/auth_providers.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,8 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
     final user = authProvider.user;
+    final themeNotifier =
+        Provider.of<ThemeNotifier>(context); // Access ThemeNotifier
 
     return Scaffold(
       appBar: AppBar(
@@ -24,7 +27,7 @@ class ProfilePage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: ElevatedButton.icon(
               onPressed: () {
-                context.go('/');
+                context.go('/'); // Navigate to the home screen
               },
               icon: const Icon(
                 Icons.home,
@@ -80,6 +83,15 @@ class ProfilePage extends StatelessWidget {
               "Finished Exercises: ${user?.finishedExercises ?? 0}",
               style: const TextStyle(fontSize: 20, color: Colors.grey),
               textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            // Dark Mode Toggle Switch
+            SwitchListTile(
+              title: const Text('Dark Mode'),
+              value: themeNotifier.isDarkMode,
+              onChanged: (value) {
+                themeNotifier.toggleTheme();
+              },
             ),
           ],
         ),
