@@ -15,6 +15,7 @@ class SigninPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFA3D9A5), // Light Green background
       appBar: AppBar(
+<<<<<<< Updated upstream
         title: const Text(
           "Sign in",
           style: TextStyle(color: Colors.white),
@@ -34,6 +35,24 @@ class SigninPage extends StatelessWidget {
                 backgroundImage: AssetImage(
                     'assets/images/your_image.png'), // Placeholder image
                 backgroundColor: Colors.transparent,
+=======
+        title: const Text("Sign in"),
+        backgroundColor: const Color(0xFF005BAA),
+      ),
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 40),
+              const Center(
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.transparent,
+                ),
+>>>>>>> Stashed changes
               ),
             ),
             const SizedBox(height: 20),

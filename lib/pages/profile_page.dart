@@ -28,11 +28,43 @@ class ProfilePage extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             CircleAvatar(
+<<<<<<< Updated upstream
               radius: 60,
               backgroundColor: Colors.transparent,
               // backgroundImage: user.imagePath != null
               //     ? FileImage(File(user.imagePath!))
               //     : const AssetImage('assets/images/default_profile.png') as ImageProvider, // Placeholder image
+=======
+              radius: 70,
+              backgroundImage: user?.image != null
+                  ? (kIsWeb || Uri.parse(user!.image!).isAbsolute
+                      ? NetworkImage(user.image!)
+                      : FileImage(File(user.image!)) as ImageProvider)
+                  : null,
+              child: user?.image == null
+                  ? const Icon(
+                      Icons.account_circle,
+                      size: 100,
+                      color: Colors.grey,
+                    )
+                  : null,
+            ),
+            const SizedBox(height: 40),
+
+            Text(
+              user?.username != null
+                  ? "Username: ${user!.username}"
+                  : "Username not available",
+              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            // Finished Exercises Count (non-editable)
+            Text(
+              "Finished Exercises: ${user?.finishedExercises ?? 0}",
+              style: const TextStyle(fontSize: 20, color: Colors.grey),
+              textAlign: TextAlign.center,
+>>>>>>> Stashed changes
             ),
             const SizedBox(height: 20),
             Text(

@@ -28,6 +28,7 @@ class SignupPage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
+<<<<<<< Updated upstream
         child: Column(
           children: [
             const SizedBox(height: 20),
@@ -44,6 +45,44 @@ class SignupPage extends StatelessWidget {
                 filled: true,
                 fillColor:
                     const Color(0xFFF5F5DC), // Light Beige background for input
+=======
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              const Text(
+                "Sign Up",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+
+              GestureDetector(
+                onTap: () async {
+                  XFile? pickedImage =
+                      await _picker.pickImage(source: ImageSource.gallery);
+                  setState(() {
+                    _image = pickedImage;
+                  });
+                },
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.grey[300],
+                  backgroundImage:
+                      _image != null ? NetworkImage(_image!.path) : null,
+                  child: _image == null
+                      ? const Icon(
+                          Icons.add_a_photo,
+                          size: 40,
+                          color: Colors.white,
+                        )
+                      : null,
+                ),
+              ),
+              const SizedBox(height: 20),
+              // Username Field
+              _buildTextField(
+                controller: usernameController,
+>>>>>>> Stashed changes
                 hintText: 'Username',
                 hintStyle: const TextStyle(color: Colors.grey),
                 border: OutlineInputBorder(

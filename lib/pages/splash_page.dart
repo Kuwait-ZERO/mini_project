@@ -30,6 +30,22 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
     return const Placeholder();
+=======
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Medetation App"),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+      ),
+      body: Center(
+        child: Image.asset(
+          'assets/images/yoga.webp ',
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+>>>>>>> Stashed changes
   }
 }

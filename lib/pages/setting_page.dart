@@ -23,16 +23,20 @@ class SettingsPage extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                // Navigate to Account details page or perform other action
                 Navigator.pushNamed(context, '/profile');
               },
               style: ElevatedButton.styleFrom(
+<<<<<<< Updated upstream
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 backgroundColor:
                     const Color(0xFF5B9BD5), // Soft Blue button color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
+=======
+                padding: EdgeInsets.symmetric(vertical: 16),
+                backgroundColor: Colors.blue,
+>>>>>>> Stashed changes
               ),
               child: const Text(
                 'Account',

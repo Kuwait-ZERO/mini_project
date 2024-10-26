@@ -1,5 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+<<<<<<< Updated upstream
+=======
+import 'package:mini_project/pages/video_page.dart';
+import 'package:mini_project/providers/exercise_provider.dart';
+import 'package:provider/provider.dart';
+
+class YogaPage extends StatefulWidget {
+  @override
+  _YogaPageState createState() => _YogaPageState();
+}
+
+class _YogaPageState extends State<YogaPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    Provider.of<ExerciseProvider>(context, listen: false).fetchExercises();
+  }
+>>>>>>> Stashed changes
 
 class YogaPage extends StatelessWidget {
   YogaPage({Key? key}) : super(key: key);
