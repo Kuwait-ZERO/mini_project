@@ -15,12 +15,12 @@ class AuthProvider extends ChangeNotifier {
   void signup({
     required String username,
     required String password,
-    required String imagePath,
+    required String image,
   }) async {
     token = await AuthServices().signup(
       username: username,
       password: password,
-      imagePath: imagePath,
+      image: image,
     );
     _setToken(token);
     print(token);
@@ -32,7 +32,9 @@ class AuthProvider extends ChangeNotifier {
       token = await AuthServices().signin(user: user);
       this.user = User.fromJson(Jwt.parseJwt(token));
       _setToken(token);
-      print(token);
+      //print(token);
+      print("Image path: ${user.image}");
+
       notifyListeners();
       return true;
     } on Exception {
@@ -75,6 +77,3 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-
-// !Jwt.isExpired(token)

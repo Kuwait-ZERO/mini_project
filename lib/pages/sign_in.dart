@@ -38,7 +38,7 @@ class SigninPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const Text(
-                'Welcome to Burgan Bank',
+                'Welcome to Meditation App',
                 style: TextStyle(
                   color: Color(0xFF005BAA),
                   fontSize: 24,
@@ -103,6 +103,14 @@ class SigninPage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () async {
+                  // Validate input fields
+                  if (usernameController.text.isEmpty ||
+                      passwordController.text.isEmpty) {
+                    showError(
+                        context, "Please enter both username and password.");
+                    return;
+                  }
+
                   var result =
                       await Provider.of<AuthProvider>(context, listen: false)
                           .signin(

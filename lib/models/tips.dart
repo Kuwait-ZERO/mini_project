@@ -2,30 +2,46 @@ class Post {
   int? id;
   String? text;
   String? author;
-  // int? upvotes[];
-  // int? downvotes[];
+  List<int> upvotes;
+  List<String> downvotes;
 
   Post({
     this.id,
     this.text,
     this.author,
-  });
+    List<int>? upvotes,
+    List<String>? downvotes,
+  })  : upvotes = upvotes ?? [],
+        downvotes = downvotes ?? [];
 
   Post.fromJson(dynamic json)
-      : text = json["text"],
+      : id = json["id"],
+        text = json["text"],
         author = json["author"],
-        id = json["id"];
-  //  text = json["text"],
-  // author = json["author"],
+        upvotes = List<int>.from(json["upvotes"] ?? []),
+        downvotes = List<String>.from(json["downvotes"] ?? []);
 
   Map<String, dynamic> toJson() {
     return {
       "id": id,
       "text": text,
       "author": author,
+      "upvotes": upvotes,
+      "downvotes": downvotes,
     };
   }
 
-  // factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-  // Map<String, dynamic> toJson() => _$UserToJson(this);
+  void upvote(int userId) {
+    if (!upvotes.contains(userId)) {
+      upvotes.add(userId);
+      downvotes.remove(userId.toString());
+    }
+  }
+
+  void downvote(String userId) {
+    if (!downvotes.contains(userId)) {
+      downvotes.add(userId);
+      upvotes.remove(int.tryParse(userId));
+    }
+  }
 }

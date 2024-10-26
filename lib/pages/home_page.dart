@@ -1,35 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mini_project/providers/auth_providers.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  void _logout(BuildContext context) {
+    // Perform logout logic here, like clearing user data or tokens
+    context.go('/login'); // Navigate to login page after logout
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('page'),
+        title: Text('Page'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.account_box_outlined),
+              title: Text('Profile'),
+              onTap: () {
+                Navigator.of(context).pop();
+                context.go('/profile');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Logout'),
+              onTap: () {
+                Provider.of<AuthProvider>(context, listen: false).logout();
+                context.go('/');
+              },
+            ),
+          ],
+        ),
       ),
       body: Column(
         children: [
-          // Empty container on top
           Container(
-            height: 200, // Adjust the height as needed
+            height: 200,
             width: double.infinity,
-            color: Colors
-                .grey[200], // Light background color to visualize the space
+            color: Colors.grey[200],
           ),
-
-          const SizedBox(
-              height: 20), // Spacing between the container and the cards
-
-          // Cards at the bottom
+          const SizedBox(height: 20),
           Expanded(
             child: GridView.count(
-              crossAxisCount: 2, // Two cards per row
-              crossAxisSpacing: 15, // Space between the cards horizontally
-              mainAxisSpacing: 15, // Space between the cards vertically
-              padding: const EdgeInsets.all(15), // Padding for the overall grid
+              crossAxisCount: 2,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+              padding: const EdgeInsets.all(15),
               children: [
                 InkWell(
                   onTap: () {
@@ -45,7 +68,7 @@ class HomePage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(20),
                         child: Text(
-                          'meditation',
+                          'Meditation',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,

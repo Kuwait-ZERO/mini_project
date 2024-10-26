@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mini_project/providers/auth_providers.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,18 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Medetation App"),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+      ),
+      body: Center(
+        child: Image.asset(
+          'assets/images/yoga.webp',
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
   }
 }

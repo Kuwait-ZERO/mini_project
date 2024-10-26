@@ -1,29 +1,34 @@
-// part 'user.g.dart';
-
-import 'dart:core';
-
 class User {
   int? id;
   String username;
   String? password;
+  String? image; // Added field for image path
+  int finishedExercises; // Added field for finished exercises
 
   User({
     this.id,
     required this.username,
     this.password,
+    this.image,
+    this.finishedExercises = 0,
   });
 
   User.fromJson(dynamic json)
       : username = json["username"],
         password = json["password"],
-        id = json["id"];
+        id = json["id"],
+        image = json["image"], // Ensure to parse imagePath
+        finishedExercises = json["finishedExercises"] ?? 0;
 
   Map<String, dynamic> toJson() {
-    return {"username": username, "password": password, "id": id};
+    return {
+      "username": username,
+      "password": password,
+      "id": id,
+      "image": image,
+      "finishedExercises": finishedExercises,
+    };
   }
-
-  // factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-  // Map<String, dynamic> toJson() => _$UserToJson(this);
 }
 
 // void parsingExample() {

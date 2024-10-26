@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mini_project/providers/auth_providers.dart';
@@ -19,14 +18,14 @@ class _SignupPageState extends State<SignupPage> {
   final ImagePicker _picker = ImagePicker();
   final _formKey = GlobalKey<FormState>();
   XFile? _image;
-  String username = "";
-  String password = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFE5F1F9),
       appBar: AppBar(
-        title: const Text("Sign up"),
+        title: const Text("Sign Up"),
+        backgroundColor: const Color(0xFF005BAA),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -51,11 +50,8 @@ class _SignupPageState extends State<SignupPage> {
                 child: CircleAvatar(
                   radius: 60,
                   backgroundColor: Colors.grey[300],
-                  backgroundImage: _image != null
-                      ? NetworkImage(
-                          (_image!.path),
-                        )
-                      : null,
+                  backgroundImage:
+                      _image != null ? NetworkImage(_image!.path) : null,
                   child: _image == null
                       ? const Icon(
                           Icons.add_a_photo,
@@ -67,46 +63,48 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 20),
               // Username Field
-              TextFormField(
-                decoration: const InputDecoration(hintText: 'Username'),
+              _buildTextField(
                 controller: usernameController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your username';
-                  }
-                  return null;
-                },
+                hintText: 'Username',
               ),
               const SizedBox(height: 20),
               // Password Field
-              TextFormField(
-                decoration: const InputDecoration(hintText: 'Password'),
+              _buildTextField(
                 controller: passwordController,
+                hintText: 'Password',
                 obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
               ),
               const SizedBox(height: 20),
               // Sign Up Button
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF005BAA),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     if (_image != null) {
                       Provider.of<AuthProvider>(context, listen: false).signup(
                         username: usernameController.text,
                         password: passwordController.text,
-                        imagePath: _image!.path,
+                        image: _image!.path,
                       );
-                      context.pop();
+                      Provider.of<AuthProvider>(context, listen: false)
+                          .logout();
+                      context.go('/');
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Please select an image')),
                       );
                     }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Please fill all fields')),
+                    );
                   }
                 },
                 child: const Text("Sign Up"),
@@ -115,6 +113,41 @@ class _SignupPageState extends State<SignupPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hintText,
+    bool obscureText = false,
+  }) {
+    return TextFormField(
+      controller: controller,
+      obscureText: obscureText,
+      style: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.grey),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Color(0xFF005BAA)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Color(0xFF005BAA),
+            width: 2,
+          ),
+        ),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter your $hintText';
+        }
+        return null;
+      },
     );
   }
 }
