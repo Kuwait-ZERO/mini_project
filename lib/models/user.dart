@@ -47,6 +47,14 @@ class Meditation {
   }
 }
 
+class MusicTrack {
+  final int id; // Use int if the id is a number
+  final String title;
+  final String file;
+
+  MusicTrack({required this.id, required this.title, required this.file});
+}
+
 
 // void parsingExample() {
 //   Map json1 = {"username": "ghanim", "password": "123", "id": 1};

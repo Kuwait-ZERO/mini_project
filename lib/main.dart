@@ -14,6 +14,7 @@ import 'package:mini_project/pages/yoga_page.dart';
 import 'package:mini_project/providers/auth_providers.dart';
 import 'package:mini_project/providers/exercise_provider.dart';
 import 'package:mini_project/providers/metitation_provider.dart';
+import 'package:mini_project/providers/music_provider.dart';
 import 'package:mini_project/providers/post_providers.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,7 @@ void main() async {
         ChangeNotifierProvider<ThemeNotifier>(create: (_) => ThemeNotifier()),
         ChangeNotifierProvider<MeditationProvider>(
             create: (_) => MeditationProvider()),
+        ChangeNotifierProvider<MusicProvider>(create: (_) => MusicProvider()),
       ],
       child: MyApp(),
     ),
@@ -86,7 +88,7 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         path: '/music',
-        builder: (context, state) => MusicPage(),
+        builder: (context, state) => MusicListPage(),
       ),
       GoRoute(
         path: '/signup',
