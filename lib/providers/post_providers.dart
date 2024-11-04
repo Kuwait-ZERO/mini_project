@@ -37,7 +37,7 @@ class PostProviders extends ChangeNotifier {
   Future<void> upvotePost(int postId, int userId) async {
     try {
       final post = posts.firstWhere((post) => post.id == postId);
-      post.upvote(userId); // This should modify the post model's upvote data
+      post.upvote(userId); 
       await DioClient().updatePost(post);
       notifyListeners();
     } catch (error) {
@@ -48,7 +48,7 @@ class PostProviders extends ChangeNotifier {
   Future<void> downvotePost(int postId, String username) async {
     try {
       final post = posts.firstWhere((post) => post.id == postId);
-      post.downvote(username); // Pass username as expected by backend
+      post.downvote(username); 
       await DioClient().updatePost(post);
       notifyListeners();
     } catch (error) {

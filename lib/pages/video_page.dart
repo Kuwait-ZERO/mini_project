@@ -21,14 +21,14 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   }
 
   Future<void> _initializeVideoPlayer() async {
-    // Use VideoPlayerController.network to load video from a URL
+
     _controller = VideoPlayerController.network(widget.video.file);
 
     try {
       await _controller.initialize();
-      setState(() {}); // Refresh the UI after initialization
+      setState(() {}); 
     } catch (error) {
-      // Handle any initialization errors
+   
       print("Error initializing video player: $error");
     }
   }

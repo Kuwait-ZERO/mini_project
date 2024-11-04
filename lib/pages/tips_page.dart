@@ -204,7 +204,7 @@ class PostCard extends StatelessWidget {
                   ],
                 ),
                 if (showDeleteButton &&
-                    isPostOwner) // Show delete button only if checkbox is checked and user is the post owner
+                    isPostOwner) 
                   IconButton(
                     onPressed: () {
                       Provider.of<PostProviders>(context, listen: false)
@@ -303,7 +303,7 @@ class AddTipFormState extends State<AddTipForm> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     backgroundColor:
-                        Colors.blueAccent, // Button background color
+                        Colors.blueAccent, 
                   ),
                   child: const Text(
                     "Add Tip Post!",
